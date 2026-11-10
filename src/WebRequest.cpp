@@ -507,6 +507,14 @@ static inline const char *rtrim_ows(const char *start, const char *end) {
 }
 
 const char *AsyncWebServerRequest::_parseReqHeader() {
+#ifdef ESP8266
+  // Header list nodes still use throwing new; reject pressure before allocation.
+  const size_t freeHeap = ESP.getFreeHeap();
+  const size_t maxBlock = ESP.getMaxFreeBlockSize();
+  if (freeHeap < 2048U || maxBlock < 512U || _temp.length() > (freeHeap - 1024U) / 3U) {
+    return asyncsrv::T_HTTP_503_HEAD;
+  }
+#endif
   AsyncWebHeader header = AsyncWebHeader::parse(_temp);
 
 #if defined(TARGET_RP2040) || defined(TARGET_RP2350) || defined(PICO_RP2040) || defined(PICO_RP2350) || defined(LIBRETINY) || defined(HOST)

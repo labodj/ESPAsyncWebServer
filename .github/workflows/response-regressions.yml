@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   pull_request:
   push:
-    branches: [main, 'release/*']
+    branches: [main, 'release/*', 'codex/firmware-integration']
 permissions:
   contents: read
 jobs:
@@ -17,4 +17,16 @@ jobs:
       - name: Run response tests with AddressSanitizer and UBSan
         env:
           CXX: ${{ matrix.cxx }}
-        run: python3 -m unittest discover -s tests -p 'test_response_*.py' -v
+        run: python3 -m unittest discover -s tests -v
+  esp8266:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install platformio==6.2.0
+      - name: Compile ESP8266 integration example
+        run: python3 -m platformio run -e esp8266

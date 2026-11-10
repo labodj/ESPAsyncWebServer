@@ -1,15 +1,14 @@
 {
   "name": "ESPAsyncWebServer",
-  "version": "3.12.1",
+  "version": "3.12.1-labo.1",
   "description": "Asynchronous HTTP and WebSocket Server Library for ESP32, ESP8266 and RP2040. Supports: WebSocket, SSE, Authentication, Arduino Json 7, File Upload, Static File serving, URL Rewrite, URL Redirect, etc.",
   "keywords": "http,async,websocket,webserver",
-  "homepage": "https://github.com/ESP32Async/ESPAsyncWebServer",
+  "homepage": "https://github.com/labodj/ESPAsyncWebServer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ESP32Async/ESPAsyncWebServer.git"
+    "url": "https://github.com/labodj/ESPAsyncWebServer.git"
   },
-  "authors":
-  {
+  "authors": {
     "name": "ESP32Async",
     "maintainer": true
   },
@@ -32,9 +31,8 @@
       ]
     },
     {
-      "owner": "ESP32Async",
       "name": "ESPAsyncTCP",
-      "version": "^2.0.0",
+      "version": "https://github.com/labodj/ESPAsyncTCP.git#766087c73b59a8de95eae7fc0d7ae0719d2c5abf",
       "platforms": "espressif8266"
     },
     {
